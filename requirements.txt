@@ -1,0 +1,6 @@
+python-dotenv
+PyMuPDF
+gigachat
+gigachain
+sentence-transformers
+faiss-cpu
