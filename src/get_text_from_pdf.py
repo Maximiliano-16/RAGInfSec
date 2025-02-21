@@ -1,4 +1,13 @@
 import fitz  # PyMuPDF
+import re
+
+def clean_text(text):
+    # Убираем специальные символы и заменяем множественные пробелы на один
+    cleaned_text = re.sub(r'\s+', ' ', text)
+    # Убираем не алфавитные символы, если это нужно
+    # cleaned_text = re.sub(r'[^а-яА-Яa-zA-Z0-9,.!? ]', '', cleaned_text)
+    return cleaned_text.strip()
+
 
 def extract_text_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
