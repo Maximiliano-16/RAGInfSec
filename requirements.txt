@@ -2,5 +2,6 @@ python-dotenv
 PyMuPDF
 gigachat
 gigachain
+langchain-community
 sentence-transformers
 faiss-cpu

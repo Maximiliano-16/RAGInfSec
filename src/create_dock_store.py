@@ -1,6 +1,6 @@
 def create_docstore(chunks):
     # Создаем хранилище документов с метаданными
-    from langchain.docstore import InMemoryDocstore
+    # from langchain.docstore import InMemoryDocstore
     from langchain.schema import Document
 
     docs = [
