@@ -3,5 +3,6 @@ PyMuPDF
 gigachat
 gigachain
 langchain-community
+langchain-huggingface
 sentence-transformers
 faiss-cpu

@@ -12,6 +12,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 
 
 
+
 from src import get_text_from_pdf
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
@@ -60,39 +61,42 @@ def main():
     embedding = HuggingFaceEmbeddings(model_name=model_name,
                                       model_kwargs=model_kwargs,
                                       encode_kwargs=encode_kwargs)
-    print('------------------------')
+    # print('------------------------')
 
 
     vector_store = FAISS.from_documents(dock_store, embedding=embedding)
 
-    embedding_retriever = vector_store.as_retriever(search_kwargs={"k": 5})
-    prompt = ChatPromptTemplate.from_template('''Ответь на вопрос пользователя. \
-    Используй при этом только информацию из контекста. 
-    Контекст пердставляет собой информацию из обучающих презентаций по информационной безопасности
-    Если в контексте нет информации для ответа, сообщи об этом пользователю.
-    Контекст: {context}
-    Вопрос: {input}
-    Ответ:''')
-    document_chain = create_stuff_documents_chain(
-        llm=llm,
-        prompt=prompt
-    )
-    retrieval_chain = create_retrieval_chain(embedding_retriever,
-                                             document_chain)
+    vector_store.save_local("faiss_index")
+    print("Индекс успешно сохранён")
 
-    q1 = 'какие существуют основные атаки в сети интернет?'
-
-    resp1 = retrieval_chain.invoke(
-        {'input': q1}
-    )
-    print(resp1['answer'])
-
-    q2 = 'Какие уровни в обеспечении информационой безопасности можно выделить?'
-
-    resp2 = retrieval_chain.invoke(
-        {'input': q2}
-    )
-    print(resp2['answer'])
+    # embedding_retriever = vector_store.as_retriever(search_kwargs={"k": 5})
+    # prompt = ChatPromptTemplate.from_template('''Ответь на вопрос пользователя. \
+    # Используй при этом только информацию из контекста.
+    # Контекст пердставляет собой информацию из обучающих презентаций по информационной безопасности
+    # Если в контексте нет информации для ответа, сообщи об этом пользователю.
+    # Контекст: {context}
+    # Вопрос: {input}
+    # Ответ:''')
+    # document_chain = create_stuff_documents_chain(
+    #     llm=llm,
+    #     prompt=prompt
+    # )
+    # retrieval_chain = create_retrieval_chain(embedding_retriever,
+    #                                          document_chain)
+    #
+    # q1 = 'какие существуют основные атаки в сети интернет?'
+    #
+    # resp1 = retrieval_chain.invoke(
+    #     {'input': q1}
+    # )
+    # print(resp1['answer'])
+    #
+    # q2 = 'Какие уровни в обеспечении информационой безопасности можно выделить?'
+    #
+    # resp2 = retrieval_chain.invoke(
+    #     {'input': q2}
+    # )
+    # print(resp2['answer'])
 
     # from langchain_core.messages import HumanMessage
     #
