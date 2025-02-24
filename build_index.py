@@ -14,6 +14,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 
 
 from src import get_text_from_pdf
+
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
