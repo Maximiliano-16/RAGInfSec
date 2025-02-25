@@ -54,6 +54,7 @@ document_chain = create_stuff_documents_chain(
 retrieval_chain = create_retrieval_chain(embedding_retriever, document_chain)
 
 # Пример запроса
-question = "Какие уровни в обеспечении информационой безопасности можно выделить?"
+# question = "Что такое шифр Виженера и как он работает?"
+question = "Какие криптографические шифры самые простые?"
 response = retrieval_chain.invoke({'input': question})
 print(response['answer'])

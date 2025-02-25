@@ -41,7 +41,7 @@ def main():
             file_path = os.path.join(pdf_folder_path, filename)
             # Вызываем функцию для обработки PDF-файла
             texts += gpdf.extract_text_from_pdf(file_path)
-            print(texts[:500])
+            print(filename)
 
     cleaned_text = gpdf.clean_text(texts)
     chunks = cds.split_text_into_chunks(cleaned_text)
